@@ -19,15 +19,15 @@ Studies about OpenTelemetry Architecture with Prometheus using Frameworks;
 - Application: [Java Quarkus sample1](./apps/java-quarkus-sample1/)
     - Quarkus 2.14.1.Final
         - Quarkus Open Telemetry
-        - Quarkus Micrometer Registry OTLP
+        - Quarkus Micrometer Registry OTLP - 2.12.0
 
 ## Architecture
 
 <image src=../docs/project_one.png height=200>
 
-## Run
+## How to Run
 
-- Build project Docker image:
+### Build Project
 
 Move to project folder:
 
@@ -41,11 +41,42 @@ Build the project:
 ./mvnw clean package
 ```
 
-Build docker image:
+### Builde and run docker:
+
+Build docker image
 
 ```shell script
 docker build -f src/main/docker/Dockerfile.jvm -t helpdev/java-quarkus-sample1-jvm .
 ```
 
-- Execute the docker-compose
+Execute the docker-compose
+
+```shell script
+docker-compose up -d
+```
+
+## Send requests to trace
+
+The docker-compose up 3 apps, service 1 calls service 2, and service 2 calls service 3 to simulate a long trace. The services run at port `8080`, `8081` and `8082`.
+
+Sample to call a request:
+
+```shell script
+curl --request 'GET' http://localhost:8080/hello
+```
+
+## How to visualize the traces
+
+Access the Jaeger in your browser: [http://localhost:16686](http://localhost:16686)
+
+
+<image src=../docs/trace.png height=200>
+
+## How to visualize the prometheus metrics
+
+Access the Prometheus in your browser: [http://localhost:9090/](http://localhost:9090/)
+
+<image src=../docs/prometheus.png height=200>
+
+Note: All metrics collected will be exported to the Prometheus with a prefix configured in [collector-gateway.yml](./config/collector-gateway.yml) file at `exporters.prometheus.namespace`
 
