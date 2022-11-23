@@ -5,6 +5,7 @@ Studies about OpenTelemetry Architecture with Prometheus using Frameworks;
 ## Studies Links
 
 - [OpenTelemetry Collector, Deployment Methods & Production Ready | The OpenTelemetry Bootcamp](https://www.youtube.com/watch?v=L_gjG4BjvSE)
+- [aspecto-io/opentelemetry-bootcamp](https://github.com/aspecto-io/opentelemetry-bootcamp)
 - [About OpenTelemetry in Quarkus](https://quarkus.io/guides/opentelemetry)
     - [brunobat/quarkus-observability-demo](https://github.com/brunobat/quarkus-observability-demo)
     - [Quarkiverse - Micrometer Registry OTLP](https://quarkiverse.github.io/quarkiverse-docs/quarkus-micrometer-registry/dev/micrometer-registry-otlp.html)
