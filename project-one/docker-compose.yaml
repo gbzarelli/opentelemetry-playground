@@ -13,7 +13,7 @@ services:
       OT_TRACER_URL: http://collector-agent:4318
       OT_METRICS_EXPORTER_URL: http://collector-agent:4317/v1/metrics
       QUARKUS_LOG_LEVEL: INFO
-      QUARKUS_OPENTELEMETRY_TRACER_RESOURCE_ATTRIBUTES_SERVICE_NAME: java-quarkus-sample1-app1
+      QUARKUS_OPENTELEMETRY_TRACER_RESOURCE_ATTRIBUTES_SERVICE_NAME: "service.name=java-quarkus-sample1-app1"
     ports: 
       - 8080:8080
 
