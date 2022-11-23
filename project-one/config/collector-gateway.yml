@@ -19,7 +19,7 @@ exporters:
     send_timestamps: true
     resource_to_telemetry_conversion:
       enabled: true
-    # namespace: prometheus
+    namespace: otelcollector
     const_labels:
       label1: value1
 

@@ -1,6 +1,51 @@
 version: '3'
 
 services:
+
+  java-quarkus-sample1-app1:
+    container_name: java-quarkus-sample1-app1
+    image: helpdev/java-quarkus-sample1-jvm
+    environment:
+      APPLICATION_NAME: java-quarkus-sample1-app1
+      HTTP_PORT: 8080
+      CALL_OTHER_SERVICE_ENABLED: 'true'
+      CALL_OTHER_SERVICE_HOST: http://java-quarkus-sample1-app2:8081
+      OT_TRACER_URL: http://collector-agent:4318
+      OT_METRICS_EXPORTER_URL: http://collector-agent:4317/v1/metrics
+      QUARKUS_LOG_LEVEL: INFO
+      QUARKUS_OPENTELEMETRY_TRACER_RESOURCE_ATTRIBUTES_SERVICE_NAME: java-quarkus-sample1-app1
+    ports: 
+      - 8080:8080
+
+  java-quarkus-sample1-app2:
+    container_name: java-quarkus-sample1-app2
+    image: helpdev/java-quarkus-sample1-jvm
+    environment:
+      APPLICATION_NAME: java-quarkus-sample1-app2
+      HTTP_PORT: 8081
+      CALL_OTHER_SERVICE_ENABLED: 'true'
+      CALL_OTHER_SERVICE_HOST: http://java-quarkus-sample1-app3:8082
+      OT_TRACER_URL: http://collector-agent:4318
+      OT_METRICS_EXPORTER_URL: http://collector-agent:4317/v1/metrics
+      QUARKUS_LOG_LEVEL: DEBUG
+      QUARKUS_OPENTELEMETRY_TRACER_RESOURCE_ATTRIBUTES: "service.name=java-quarkus-sample1-app2"
+    ports: 
+      - 8081:8081
+
+  java-quarkus-sample1-app3:
+    container_name: java-quarkus-sample1-app3
+    image: helpdev/java-quarkus-sample1-jvm
+    environment:
+      APPLICATION_NAME: java-quarkus-sample1-app3
+      HTTP_PORT: 8082
+      CALL_OTHER_SERVICE_ENABLED: 'false'
+      OT_TRACER_URL: http://collector-agent:4318
+      OT_METRICS_EXPORTER_URL: http://collector-agent:4317/v1/metrics
+      QUARKUS_LOG_LEVEL: INFO
+      QUARKUS_OPENTELEMETRY_TRACER_RESOURCE_ATTRIBUTES: "service.name=java-quarkus-sample1-app3"
+    ports: 
+      - 8082:8082
+
   jaeger:
     image: jaegertracing/all-in-one
     ports: 

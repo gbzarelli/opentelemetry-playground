@@ -24,3 +24,28 @@ Studies about OpenTelemetry Architecture with Prometheus using Frameworks;
 ## Architecture
 
 <image src=../docs/project_one.png height=200>
+
+## Run
+
+- Build project Docker image:
+
+Move to project folder:
+
+```shell script
+cd ./apps/java-quarkus-sample1
+```
+
+Build the project:
+
+```shell script
+./mvnw clean package
+```
+
+Build docker image:
+
+```shell script
+docker build -f src/main/docker/Dockerfile.jvm -t helpdev/java-quarkus-sample1-jvm .
+```
+
+- Execute the docker-compose
+
