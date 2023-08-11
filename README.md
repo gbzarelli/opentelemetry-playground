@@ -2,10 +2,19 @@
 
 OpenTelemetry Playground is a project to improve my knowledge about it.
 
-## The Project One
+#### Stack
 
-Studies about OpenTelemetry Architecture with Prometheus using Frameworks; [...see more datails here](./project-one)
+- Otel Colector 
+- Jeager
+- Prometheus
+- Grafana
+- Application with Quarkus
 
 ## The Project Two
 
-_...TODO_
+#### Stack
+
+- Otel Colector
+- Jeager
+- Prometheus
+- Grafana

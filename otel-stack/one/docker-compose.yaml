@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports: 
+      - 5775:5775
+      - 6831:6831
+      - 6832:6832
+      - 5778:5778
+      - 16686:16686 # UI
+      - 14268:14268
+      - 14250:14250
+      - 9411:9411
+
+  prometheus:
+    image: prom/prometheus
+    volumes: 
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports: 
+      - 9090:9090
+
+  collector-gateway:
+    image: otel/opentelemetry-collector-contrib
+    volumes: 
+      - ./config/collector-gateway.yml:/etc/otel-collector-config.yaml
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    ports:
+      - "1888:1888"   # pprof extension
+      - "8888:8888"   # Prometheus metrics exposed by the collector
+      - "8889:8889"   # Prometheus exporter metrics
+      - "13133:13133" # health_check extension
+      - "4320:4320"   # OTLP gRPC receiver
+      - "55670:55679" # zpages extension
+
+  collector-agent:
+    image: otel/opentelemetry-collector
+    volumes: 
+      - ./config/collector-agent.yml:/etc/otel-collector-config.yaml
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    ports:
+      - "4317:4317"   # OTLP HTTP receiver
+      - "4318:4318"   # OTLP gRPC receiver
+
+  grafana:
+    image: grafana/grafana:9.3.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./config/ds-prometheus.yaml:/etc/grafana/provisioning/datasources/datasource.yml
+    environment:
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_BASIC_ENABLED=false
+    depends_on:
+      - prometheus
