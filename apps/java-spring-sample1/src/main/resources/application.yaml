@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: ${APPLICATION_NAME:spring-1}
+server:
+  port: ${HTTP_PORT:8081}
+management:
+  metrics:
+    distribution:
+      percentiles:
+        http.server.requests: 0.50, 0.55, 0.95, 0.99
+  otlp:
+    metrics:
+      export:
+        enabled: true
+        step: 1s
+        url: http://localhost:4317/v1/metrics
+
+logging:
+  level:
+    root: trace
