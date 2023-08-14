@@ -11,7 +11,7 @@ Studies about OpenTelemetry Architecture with Prometheus using Frameworks;
 
 ## Architecture
 
-TODO
+Apps ---send data---> Otel Collector ---send data---> Prometheus/Jeager
 
 ## Services
 

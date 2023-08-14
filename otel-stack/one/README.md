@@ -15,6 +15,7 @@ Studies about OpenTelemetry Architecture with Prometheus using Frameworks;
 
 - OpenTelemetry Collector (distributed architecture with agent and gateway)
 - Prometheus
+  - In this sample, the Prometheus scrap metrics in Collector Gateway
 - Jaeger Tracing
 - Grafana
 
