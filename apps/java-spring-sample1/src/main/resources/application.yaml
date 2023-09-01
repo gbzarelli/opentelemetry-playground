@@ -4,16 +4,32 @@ spring:
 server:
   port: ${HTTP_PORT:8081}
 management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        # you dont need enable prometheus if you use otel
+        # this code is just a sample to visualize the metrics in /actuator/prometheus
+        include: health,info,prometheus
   metrics:
     distribution:
       percentiles:
         http.server.requests: 0.50, 0.55, 0.95, 0.99
+  endpoint:
+    health:
+      show-details: always
+    # you dont need enable prometheus if you use otel
+    # this code is just a sample to visualize the metrics in /actuator/prometheus
+    prometheus:
+      enabled: true
+
+# OpenTelemetry Configuration:
   otlp:
     metrics:
       export:
         enabled: true
         step: 1s
-        url: http://localhost:4317/v1/metrics
+        url: http://localhost:4318/v1/metrics
 
 logging:
   level:
